@@ -1,4 +1,4 @@
-import { Controller, Get, Post, HttpCode, Body, Param, ValidationPipe, ParseIntPipe, ForbiddenException } from '@nestjs/common'
+import { Controller, Get, Post, HttpCode, Body, Param, ValidationPipe, ParseIntPipe } from '@nestjs/common'
 import { AbstractService } from './AbstractService'
 import { Roles } from '../api.common/RoleDecorator'
 
@@ -9,7 +9,7 @@ export class AbstractController {
   }
 
   @Get()
-  async findAll(): Promise<AbstractEntity[]> {
+  async findAll(): Promise<any[]> {
     console.log('findAll()')
 
     return this.service.findAll()
@@ -17,7 +17,7 @@ export class AbstractController {
 
   @Get(':id')
   async findOne(
-    @Param('id', new ParseIntPipe()) id: number): Promise<AbstractEntity> {
+    @Param('id', new ParseIntPipe()) id: number): Promise<any> {
     console.log('findAll(', id, ')')
 
     return this.service.findOne(id)
@@ -26,18 +26,10 @@ export class AbstractController {
   @Post()
   @HttpCode(204)
   @Roles('admin')
-  async create( @Body(new ValidationPipe()) abstractEntity: AbstractEntity) {
-    console.log('create(', abstractEntity, ')')
+  async create( @Body(new ValidationPipe()) entity: any) {
+    console.log('create(', entity, ')')
 
-    this.service.create(abstractEntity)
-  }
-
-  // custom endpoint (use multiple path to avoid conflict with crud operation)
-  @Get('search/forbidden')
-  async forbidden() {
-    console.log('forbidden()')
-
-    throw new ForbiddenException()
+    this.service.create(entity)
   }
 
 }

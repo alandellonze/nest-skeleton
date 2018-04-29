@@ -3,8 +3,10 @@ import { Component, NotFoundException } from '@nestjs/common'
 @Component()
 export class AbstractService {
 
-  // FIXME should be the endpoint
-  private readonly entities: []
+  private type: string
+
+// FIXME should be the endpoint
+  private entities: any[]
 
   init(type: any) {
     this.type = type
@@ -17,7 +19,7 @@ export class AbstractService {
     ]
   }
 
-  async findAll(): Promise<[]> {
+  async findAll(): Promise<any[]> {
     // FIXME should be the endpoint
     return this.entities
   }

@@ -1,18 +1,14 @@
 import { NestFactory } from '@nestjs/core'
-import { ValidationPipe } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 
-import { AppModule } from './app.module'
-import { GlobalExceptionFilter } from './common/GlobalExceptionFilter'
-import { RoleGuard } from './common/RoleGuard'
-import { LoggingInterceptor } from './common/LoggingInterceptor'
+import { AppModule } from './AppModule'
+import { GlobalExceptionFilter } from './api.common/GlobalExceptionFilter'
+import { RoleGuard } from './api.common/RoleGuard'
+import { LoggingInterceptor } from './api.common/LoggingInterceptor'
 
 async function bootstrap() {
   // define app
   const app = await NestFactory.create(AppModule)
-
-  // apply validation
-  app.useGlobalPipes(new ValidationPipe())
 
   // apply custom exception filter
   app.useGlobalFilters(new GlobalExceptionFilter())

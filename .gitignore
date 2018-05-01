@@ -1,9 +1,11 @@
 # Node.js
 node_modules/
 
-# eclipse
-.settings/
+# Editor directories and files
+.settings
+.metadata
 .project
+.idea
 
 # project
 dist/

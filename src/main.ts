@@ -17,7 +17,7 @@ async function bootstrap() {
   app.useGlobalGuards(new RoleGuard(new Reflector()))
 
   // apply custom logging interceptor
-  app.useGlobalInterceptors(new LoggingInterceptor());
+  app.useGlobalInterceptors(new LoggingInterceptor())
 
   // start app
   await app.listen(3000)

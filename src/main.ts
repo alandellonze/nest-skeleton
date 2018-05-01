@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core'
 import { Reflector } from '@nestjs/core'
+import * as cors from 'cors';
 
 import { AppModule } from './AppModule'
 import { GlobalExceptionFilter } from './api.common/GlobalExceptionFilter'
@@ -19,6 +20,9 @@ async function bootstrap() {
   // apply custom logging interceptor
   app.useGlobalInterceptors(new LoggingInterceptor())
 
+  // eneble cors
+  app.use(cors())
+  
   // start app
   await app.listen(3000)
 }
